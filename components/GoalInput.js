@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, View, Button } from "react-native";
+import {
+  StyleSheet,
+  TextInput,
+  View,
+  Button,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 
 const GoalInput = (props) => {
   const [enteredGoalText, setEnteredGoalText] = useState("");
@@ -21,8 +28,13 @@ const GoalInput = (props) => {
         onChangeText={goalInputHandler}
         value={enteredGoalText}
       />
-      <View style={styles.button}>
-        <Button title="Add Goal" color={"white"} onPress={addGoalHandler} />
+      <View>
+        <TouchableOpacity
+          onPress={addGoalHandler}
+          style={{ backgroundColor: "blue", padding: 10, borderRadius: 4 }}
+        >
+          <Text style={{ color: "white" }}>Add Goal</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -47,9 +59,11 @@ const styles = StyleSheet.create({
     marginRight: 8,
     padding: 8,
   },
-  button: {
-    backgroundColor: "blue",
-    color: "white",
+  buttonContainer: {
+    backgroundColor: "white",
     borderRadius: 4,
+  },
+  button: {
+    color: "blue",
   },
 });
