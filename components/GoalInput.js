@@ -6,6 +6,7 @@ import {
   Button,
   TouchableOpacity,
   Text,
+  Modal,
 } from "react-native";
 
 const GoalInput = (props) => {
@@ -21,22 +22,26 @@ const GoalInput = (props) => {
   };
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        placeholder="Course Goal"
-        style={styles.textInput}
-        onChangeText={goalInputHandler}
-        value={enteredGoalText}
-      />
-      <View>
-        <TouchableOpacity
-          onPress={addGoalHandler}
-          style={{ backgroundColor: "blue", padding: 10, borderRadius: 4 }}
-        >
-          <Text style={{ color: "white" }}>Add Goal</Text>
-        </TouchableOpacity>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          placeholder="Course Goal"
+          style={styles.textInput}
+          onChangeText={goalInputHandler}
+          value={enteredGoalText}
+        />
+        <View>
+          <View style={styles.buttonContainer}>
+            <View style={styles.button}>
+              <Button title="Add Goal" onPress={addGoalHandler} />
+            </View>
+            <View style={styles.button}>
+              <Button title="Cancel" onPress={props.onCancel} />
+            </View>
+          </View>
+        </View>
       </View>
-    </View>
+    </Modal>
   );
 };
 
@@ -45,25 +50,28 @@ export default GoalInput;
 const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
     marginBottom: 24,
+    padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#cccccc",
   },
   textInput: {
     borderWidth: 1,
     borderColor: "#cccccc",
-    width: "70%",
-    marginRight: 8,
+    width: "100%",
     padding: 8,
   },
   buttonContainer: {
-    backgroundColor: "white",
-    borderRadius: 4,
+    flexDirection: "row",
   },
   button: {
-    color: "blue",
+    width: 100,
+    marginHorizontal: 8,
+    borderWidth: 1,
+    borderColor: "blue",
+    borderRadius: 6,
+    marginTop: 16,
   },
 });
