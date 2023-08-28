@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button, FlatList, StyleSheet, View } from "react-native";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
+import { StatusBar } from "expo-status-bar";
 
 export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
@@ -30,34 +31,37 @@ export default function App() {
   };
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        color="#5e0acc"
-        onPress={setAddGoalHandler}
-      />
-      <GoalInput
-        onAddGoal={addGoalHandler}
-        visible={modalIsVisible}
-        onCancel={endAddGoalHandler}
-      />
-      <View style={styles.goalsContainer}>
-        <FlatList
-          alwaysBounceVertical={false}
-          data={courseGoals}
-          keyExtractor={(item) => item.id}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                onDeleteItem={deleteGoalhandler}
-                id={itemData.item.id}
-              />
-            );
-          }}
+    <>
+      <StatusBar style="light" />
+      <View style={styles.appContainer}>
+        <Button
+          title="Add New Goal"
+          color="#a065ec"
+          onPress={setAddGoalHandler}
         />
+        <GoalInput
+          onAddGoal={addGoalHandler}
+          visible={modalIsVisible}
+          onCancel={endAddGoalHandler}
+        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            alwaysBounceVertical={false}
+            data={courseGoals}
+            keyExtractor={(item) => item.id}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  onDeleteItem={deleteGoalhandler}
+                  id={itemData.item.id}
+                />
+              );
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
