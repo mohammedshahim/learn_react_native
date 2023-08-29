@@ -2,7 +2,8 @@ import { Text, View, Pressable, StyleSheet } from "react-native";
 
 const PrimaryButton = ({ children }) => {
   const pressHandler = () => {
-    console.log("pressed");
+    const randomNum = Math.floor(Math.random() * 1000000);
+    console.log("pressed " + randomNum);
   };
   return (
     <View style={styles.buttonOuterContainer}>
